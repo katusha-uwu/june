@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Бластим · SMM-отчёт · Июнь 2026</title>
+<style>
+:root{
+  --bg:#0f1117; --s1:#1a1d27; --s2:#22263a; --border:#2e3348;
+  --text:#e2e8f0; --muted:#8892a4; --r:14px;
+  --blue:#38bdf8; --green:#34d399; --purple:#a78bfa; --orange:#fb923c; --pink:#f472b6;
+  --blue-d:rgba(56,189,248,.12); --green-d:rgba(52,211,153,.12); --purple-d:rgba(167,139,250,.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+.ticker{overflow:hidden;background:var(--blue);white-space:nowrap}
+.ticker__track{display:inline-block;padding:9px 0;font-size:12px;font-weight:700;letter-spacing:.09em;font-family:monospace;color:#0f1117;animation:scroll-left 50s linear infinite}
+.ticker__track span{padding-right:60px}
+@keyframes scroll-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.page{max-width:1100px;margin:0 auto;padding:0 24px 80px}
+header{display:flex;align-items:center;gap:16px;padding:40px 0 32px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+.logo{width:44px;height:44px;background:linear-gradient(135deg,var(--purple),var(--blue));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+header h1{font-size:22px;font-weight:700;letter-spacing:-.3px}
+header p{color:var(--muted);font-size:13px;margin-top:2px}
+.period-tags{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.ptag{padding:5px 14px;border-radius:99px;font-size:12px;font-weight:600;border:1px solid}
+.ptag-blue{background:var(--blue-d);border-color:rgba(56,189,248,.4);color:var(--blue)}
+.ptag-green{background:var(--green-d);border-color:rgba(52,211,153,.4);color:var(--green)}
+.ptag-purple{background:var(--purple-d);border-color:rgba(167,139,250,.4);color:var(--purple)}
+.stitle{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin:36px 0 16px;display:flex;align-items:center;gap:10px}
+.stitle::after{content:'';flex:1;height:1px;background:var(--border)}
+.glossary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:4px}
+@media(max-width:800px){.glossary{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:440px){.glossary{grid-template-columns:1fr}}
+.gterm{background:var(--s2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px}
+.gterm-name{font-family:monospace;font-size:13px;font-weight:700;color:var(--orange);margin-bottom:6px}
+.gterm-full{font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px}
+.gterm-desc{font-size:11px;color:var(--muted);line-height:1.5}
+.gterm-formula{font-family:monospace;font-size:10px;color:var(--blue);margin-top:6px}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.kpi-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:860px){.kpi-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:440px){.kpi-grid,.kpi-grid-4{grid-template-columns:1fr}}
+.kpi{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;position:relative;transition:transform .15s,box-shadow .15s;overflow:hidden}
+.kpi:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r) var(--r) 0 0}
+.c-blue .kpi::before,.kpi.c-blue::before{background:var(--blue)}
+.c-green .kpi::before,.kpi.c-green::before{background:var(--green)}
+.c-purple .kpi::before,.kpi.c-purple::before{background:var(--purple)}
+.kpi-label{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:10px}
+.kpi-value{font-size:28px;font-weight:800;letter-spacing:-1px;line-height:1}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.4}
+.c-blue .kpi-value,.kpi.c-blue .kpi-value{color:var(--blue)}
+.c-green .kpi-value,.kpi.c-green .kpi-value{color:var(--green)}
+.c-purple .kpi-value,.kpi.c-purple .kpi-value{color:var(--purple)}
+.charts-grid{display:grid;grid-template-columns:1fr;gap:20px}
+.card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:22px 22px 18px}
+.card-full{grid-column:1/-1}
+.card-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:18px}
+canvas{display:block;width:100%;max-width:100%;max-height:260px}
+.top-table{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:16px}
+.top-head{display:grid;grid-template-columns:32px 1fr 90px 60px 60px 80px 82px;gap:0;background:var(--s2);border-bottom:1px solid var(--border);padding:10px 16px;align-items:center}
+.top-head span{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+.top-head span:not(:nth-child(2)){text-align:center}
+.top-row{display:grid;grid-template-columns:32px 1fr 90px 60px 60px 80px 82px;gap:0;padding:12px 16px;border-bottom:1px solid var(--border);align-items:center;transition:background .12s}
+.top-row:last-child{border-bottom:none}
+.top-row:hover{background:var(--s2)}
+.top-row>*:not(:nth-child(2)){text-align:center}
+@media(max-width:760px){
+  .top-head,.top-row{grid-template-columns:32px 1fr 80px 76px}
+  .col-r,.col-f,.col-sub{display:none}
+}
+.rank{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid var(--border);color:var(--muted);background:var(--s2)}
+.rk1{background:rgba(251,191,36,.15);border-color:#fbbf24;color:#fbbf24}
+.rk2{background:rgba(203,213,225,.1);border-color:#94a3b8;color:#94a3b8}
+.rk3{background:rgba(180,83,9,.15);border-color:#b45309;color:#d97706}
+.snippet{font-size:12px;line-height:1.4}
+.snip-date{font-size:11px;color:var(--muted);margin-top:2px}
+.num{font-size:13px;font-weight:700}
+.sm{font-size:12px;color:var(--muted)}
+.pill{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700}
+.pill-g{background:rgba(52,211,153,.15);color:#34d399}
+.pill-y{background:rgba(245,158,11,.15);color:#f59e0b}
+.pill-m{background:rgba(136,146,164,.12);color:var(--muted)}
+.pill-p{background:rgba(167,139,250,.12);color:var(--purple)}
+.leg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:14px;align-items:center}
+.leg-dot{width:10px;height:10px;border-radius:2px;display:inline-block}
+.insight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:860px){.insight-grid{grid-template-columns:1fr}}
+.insight-card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border:1px solid var(--border);border-radius:var(--r);padding:20px 22px}
+.insight-kicker{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--blue);margin-bottom:10px}
+.insight-card h3{font-size:18px;line-height:1.25;letter-spacing:-.03em;margin-bottom:10px}
+.insight-card p{font-size:13px;line-height:1.65;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="ticker">
+  <div class="ticker__track">
+    <span>ИЮНЬ 2026 · @BLASTIM · ПОДПИСЧИКИ 9 411 → 9 533 · ПОСТОВ 42 · ПРОСМОТРЫ 67 140 · AVG VIEWS 1 599 · ER% ОХВАТ 1,26% · AR% ОХВАТ 2,18% · VR% ОХВАТ 0,89% · AR% ПОДПИСЧИКОВ 0,37% · РЕАКЦИИ 847 · РЕПОСТЫ 599 · КОММЕНТАРИИ 21 · СТОРИС 9 · ПРОСМОТРЫ СТОРИС 10 097 · ER% СТОРИС 1,71%</span>
+    <span>ИЮНЬ 2026 · @BLASTIM · ПОДПИСЧИКИ 9 411 → 9 533 · ПОСТОВ 42 · ПРОСМОТРЫ 67 140 · AVG VIEWS 1 599 · ER% ОХВАТ 1,26% · AR% ОХВАТ 2,18% · VR% ОХВАТ 0,89% · AR% ПОДПИСЧИКОВ 0,37% · РЕАКЦИИ 847 · РЕПОСТЫ 599 · КОММЕНТАРИИ 21 · СТОРИС 9 · ПРОСМОТРЫ СТОРИС 10 097 · ER% СТОРИС 1,71%</span>
+  </div>
+</div>
+<div class="page">
+<header>
+  <div class="logo">🧬</div>
+  <div>
+    <h1>SMM-отчёт · Бластим</h1>
+    <p>Telegram · @blastim · июнь 2026</p>
+  </div>
+  <div class="period-tags">
+    <span class="ptag ptag-blue">июнь 2026 · 42 поста</span>
+    <span class="ptag ptag-green">9 411 → 9 533 подписчиков</span>
+    <span class="ptag ptag-purple">9 сторис</span>
+  </div>
+</header>
+<div class="stitle">Что означают метрики</div>
+<div class="glossary">
+  <div class="gterm">
+    <div class="gterm-name">AVG</div>
+    <div class="gterm-full">Average — среднее</div>
+    <div class="gterm-desc">Средняя величина по всем постам или сторис месяца. Например, AVG Views — средние просмотры одного поста.</div>
+    <div class="gterm-formula">= Сумма / Количество</div>
+  </div>
+  <div class="gterm">
+    <div class="gterm-name">ER%</div>
+    <div class="gterm-full">Engagement Rate — реакции</div>
+    <div class="gterm-desc">Доля аудитории, поставившей реакцию. Чем выше, тем сильнее эмоциональный отклик на контент.</div>
+    <div class="gterm-formula">= Реакции / Просмотры × 100</div>
+  </div>
+  <div class="gterm">
+    <div class="gterm-name">AR%</div>
+    <div class="gterm-full">Action Rate — полная вовлечённость</div>
+    <div class="gterm-desc">Учитывает все действия: реакции, репосты и комментарии. Показывает общую активность аудитории на пост.</div>
+    <div class="gterm-formula">= (Реакции + Репосты + Комм.) / Просмотры × 100</div>
+  </div>
+  <div class="gterm">
+    <div class="gterm-name">VR%</div>
+    <div class="gterm-full">Viral Rate — вирусность</div>
+    <div class="gterm-desc">Доля просмотревших, кто поделился постом. Высокий VR означает органическое распространение контента.</div>
+    <div class="gterm-formula">= Репосты / Просмотры × 100</div>
+  </div>
+</div>
+<p style="font-size:11px;color:var(--muted);margin:10px 0 0;padding:0 2px">
+  Метрики <strong style="color:var(--blue)">к охвату</strong> делят на просмотры поста.
+  Метрики <strong style="color:var(--green)">к подписчикам</strong> делят avg-значение за пост на общее число подписчиков.
+  Для метрик июня к подписчикам берём среднюю базу месяца: (9 411 + 9 533) / 2 = 9 472. Чистый прирост за месяц: +122 (1,30%).
+</p>
+<div class="stitle">Посты — метрики к охвату (просмотры)</div>
+<div class="kpi-grid c-blue">
+  <div class="kpi">
+    <div class="kpi-label">Публикации</div>
+    <div class="kpi-value">42</div>
+    <div class="kpi-sub">за 30 дней июня 2026</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Всего просмотров</div>
+    <div class="kpi-value">67 140</div>
+    <div class="kpi-sub">суммарно по всем постам</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">AVG Views / пост</div>
+    <div class="kpi-value">1 599</div>
+    <div class="kpi-sub">средний охват одного поста</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">ER% охват</div>
+    <div class="kpi-value">1,26%</div>
+    <div class="kpi-sub">847 реакций / 67 140 просм.</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">AR% охват</div>
+    <div class="kpi-value">2,18%</div>
+    <div class="kpi-sub">1 467 действий / 67 140 просм.</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">VR% охват</div>
+    <div class="kpi-value">0,89%</div>
+    <div class="kpi-sub">599 репостов / 67 140 просм.</div>
+  </div>
+</div>
+<div class="stitle">Посты — метрики к подписчикам (средняя база 9 472)</div>
+<div class="kpi-grid c-green">
+  <div class="kpi">
+    <div class="kpi-label">AVG реакций / пост</div>
+    <div class="kpi-value">20,2</div>
+    <div class="kpi-sub">847 реакций на 42 поста</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">AVG репостов / пост</div>
+    <div class="kpi-value">14,3</div>
+    <div class="kpi-sub">599 репостов на 42 поста</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">AVG комментариев / пост</div>
+    <div class="kpi-value">0,50</div>
+    <div class="kpi-sub">21 комментариев на 42 поста</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">ER% / подписчик</div>
+    <div class="kpi-value">0,21%</div>
+    <div class="kpi-sub">avg 20,2 реакц./пост ÷ 9 472 ср. подп.</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">AR% / подписчик</div>
+    <div class="kpi-value">0,37%</div>
+    <div class="kpi-sub">avg 35 действий/пост ÷ 9 472 ср. подп.</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">VR% / подписчик</div>
+    <div class="kpi-value">0,15%</div>
+    <div class="kpi-sub">avg 14,3 реп./пост ÷ 9 472 ср. подп.</div>
+  </div>
+</div>
+<div class="stitle">Сторис · июнь 2026</div>
+<div class="kpi-grid-4 c-purple">
+  <div class="kpi">
+    <div class="kpi-label">Сторис опубликовано</div>
+    <div class="kpi-value">9</div>
+    <div class="kpi-sub">за июнь 2026</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">AVG просмотры / сторис</div>
+    <div class="kpi-value">1 122</div>
+    <div class="kpi-sub">10 097 просм. на 9 сторис</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">AVG реакции / сторис</div>
+    <div class="kpi-value">19,2</div>
+    <div class="kpi-sub">173 реакций на 9 сторис</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">ER% сторис</div>
+    <div class="kpi-value">1,71%</div>
+    <div class="kpi-sub">173 реакций / 10 097 просм.</div>
+  </div>
+</div>
+<div class="stitle">Выводы и итоги</div>
+<div class="insight-grid">
+  <div class="insight-card">
+    <div class="insight-kicker">Главный итог</div>
+    <h3>В июне канал усилил охват относительно мая, а база подписчиков продолжила расти.</h3>
+    <p>67 140 просмотров и средние 1 599 на пост дают каналу понятный рабочий уровень внимания. База подписчиков выросла с 9 411 до 9 533 (+122; 1,30%). Относительно мая суммарный охват вырос на 9 754 просмотра. Пики отдельных публикаций показывают, что сильнее всего канал расширяет охват не количеством, а удачным попаданием в тему и формулировку.</p>
+  </div>
+  <div class="insight-card">
+    <div class="insight-kicker">Что видно по вовлечению</div>
+    <h3>Контент продолжает лучше работать на полезность и пересылку, чем на разговор в комментариях.</h3>
+    <p>AR% по охвату составил 2,18%, VR% — 0,89%, всего действий было 1 467 при 21 комментариях и 42 постах. Это означает, что материалы сохраняют прикладную ценность и ими делятся, но точка входа в обсуждение пока появляется реже, чем точка входа в пересылку.</p>
+  </div>
+  <div class="insight-card">
+    <div class="insight-kicker">Что делать дальше</div>
+    <h3>Следующий рост логично искать через связку “сторис → сильный пост → повод ответить”.</h3>
+    <p>Сторис дали ER 1,71% при среднем охвате 1 122 на сторис, так что в июне короткий формат уже работал как быстрый прогрев внимания. Для следующего цикла стоит выделить темы с лучшим AR%, усиливать их заранее и тестировать один конкретный триггер на ответ: вопрос, выбор между вариантами, короткую позицию или мини-дискуссию.</p>
+  </div>
+</div>
+<div class="stitle">Тренды</div>
+<div class="charts-grid">
+  <div class="card card-full">
+    <div class="card-title">Просмотры по дням июня 2026 (суммарно по постам дня)</div>
+    <canvas id="dailyChart"></canvas>
+  </div>
+  <div class="card card-full">
+    <div class="card-title">AR% по постам — пунктир: среднее 2,18%</div>
+    <canvas id="arChart" style="max-height:200px"></canvas>
+  </div>
+</div>
+<div class="stitle">Топ-10 постов по просмотрам</div>
+<div class="leg">
+  <span>AR% (охват):</span>
+  <span><span class="leg-dot" style="background:#34d399"></span> ≥ 3%</span>
+  <span><span class="leg-dot" style="background:#f59e0b"></span> 1,5–3%</span>
+  <span><span class="leg-dot" style="background:#4b5268"></span> &lt; 1,5%</span>
+  <span style="margin-left:8px;color:var(--purple)">Фиолетовый = AR% к подписчикам</span>
+</div>
+<div class="top-table">
+  <div class="top-head">
+    <span>#</span>
+    <span>Пост</span>
+    <span>Просм.</span>
+    <span class="col-r">Реакц.</span>
+    <span class="col-f">Реп.</span>
+    <span>AR% охват</span>
+    <span class="col-sub">AR% подп.</span>
+  </div>
+  <div id="topRows"></div>
+</div>
+</div>
+<script>
+const GRID = 'rgba(46,51,72,.7)';
+const TEXT = '#8892a4';
+function setupCanvas(id, height){
+  const canvas = document.getElementById(id);
+  if (!canvas) return null;
+  const container = canvas.closest('.card') || canvas.parentElement;
+  const parentWidth = container ? Math.round(container.getBoundingClientRect().width || container.clientWidth || 0) : 0;
+  const ownWidth = Math.round(canvas.getBoundingClientRect().width || 0);
+  const width = Math.max(320, parentWidth || ownWidth || 800);
+  const dpr = window.devicePixelRatio || 1;
+  canvas.style.width = '100%';
+  canvas.style.height = `${height}px`;
+  canvas.width = Math.round(width * dpr);
+  canvas.height = Math.round(height * dpr);
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, width, height);
+  ctx.font = "12px 'Inter','Segoe UI',system-ui,sans-serif";
+  ctx.fillStyle = TEXT;
+  ctx.strokeStyle = GRID;
+  return {canvas, ctx, width, height};
+}
+function labelStep(count, targetTicks = 10){
+  return Math.max(1, Math.ceil(count / targetTicks));
+}
+function ensureTooltip(card){
+  if (!card) return null;
+  card.style.position = 'relative';
+  let tooltip = card.querySelector('.offline-tooltip');
+  if (!tooltip){
+    tooltip = document.createElement('div');
+    tooltip.className = 'offline-tooltip';
+    tooltip.style.position = 'absolute';
+    tooltip.style.pointerEvents = 'none';
+    tooltip.style.zIndex = '20';
+    tooltip.style.padding = '8px 10px';
+    tooltip.style.borderRadius = '10px';
+    tooltip.style.background = '#22263a';
+    tooltip.style.border = '1px solid #2e3348';
+    tooltip.style.boxShadow = '0 12px 28px rgba(0,0,0,.35)';
+    tooltip.style.color = '#e2e8f0';
+    tooltip.style.fontSize = '12px';
+    tooltip.style.lineHeight = '1.35';
+    tooltip.style.whiteSpace = 'nowrap';
+    tooltip.style.opacity = '0';
+    tooltip.style.transform = 'translate(-50%, calc(-100% - 10px))';
+    tooltip.style.transition = 'opacity .12s ease';
+    card.appendChild(tooltip);
+  }
+  return tooltip;
+}
+function positionTooltip(tooltip, card, event){
+  const cardRect = card.getBoundingClientRect();
+  const localX = event.clientX - cardRect.left;
+  const localY = event.clientY - cardRect.top;
+  tooltip.style.left = `${Math.max(18, Math.min(localX, cardRect.width - 18))}px`;
+  tooltip.style.top = `${Math.max(18, localY - 8)}px`;
+  tooltip.style.opacity = '1';
+}
+function addLegend(id, items){
+  const canvas = document.getElementById(id);
+  if (!canvas) return;
+  const card = canvas.parentElement;
+  let legend = card.querySelector('.offline-legend');
+  if (!legend){
+    legend = document.createElement('div');
+    legend.className = 'offline-legend';
+    legend.style.display = 'flex';
+    legend.style.gap = '14px';
+    legend.style.flexWrap = 'wrap';
+    legend.style.marginBottom = '14px';
+    legend.style.fontSize = '12px';
+    legend.style.color = TEXT;
+    card.insertBefore(legend, canvas);
+  }
+  legend.innerHTML = items.map(item => `
+    <span style="display:inline-flex;align-items:center;gap:8px">
+      <span style="width:12px;height:12px;border-radius:2px;background:${item.color};display:inline-block"></span>
+      ${item.label}
+    </span>
+  `).join('');
+}
+function niceMax(value){
+  if (value <= 0) return 1;
+  const pow = Math.pow(10, Math.floor(Math.log10(value)));
+  const norm = value / pow;
+  let nice;
+  if (norm <= 1) nice = 1;
+  else if (norm <= 2) nice = 2;
+  else if (norm <= 5) nice = 5;
+  else nice = 10;
+  return nice * pow;
+}
+function drawAxes(ctx, width, height, maxY, tickFormatter){
+  const m = {top: 16, right: 14, bottom: 28, left: 48};
+  const plotW = width - m.left - m.right;
+  const plotH = height - m.top - m.bottom;
+  ctx.strokeStyle = GRID;
+  ctx.fillStyle = TEXT;
+  ctx.lineWidth = 1;
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'middle';
+  const ticks = 4;
+  for (let i = 0; i <= ticks; i++){
+    const y = m.top + (plotH * i / ticks);
+    const val = maxY - (maxY * i / ticks);
+    ctx.beginPath();
+    ctx.moveTo(m.left, y);
+    ctx.lineTo(width - m.right, y);
+    ctx.stroke();
+    ctx.fillText(tickFormatter(val), m.left - 8, y);
+  }
+  ctx.beginPath();
+  ctx.moveTo(m.left, m.top);
+  ctx.lineTo(m.left, height - m.bottom);
+  ctx.lineTo(width - m.right, height - m.bottom);
+  ctx.stroke();
+  return {m, plotW, plotH};
+}
+function roundRect(ctx, x, y, w, h, r, fill){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+  ctx.fillStyle = fill;
+  ctx.fill();
+}
+function drawBarChart(id, labels, data, options = {}){
+  const scene = setupCanvas(id, options.height || 260);
+  if (!scene) return;
+  const {canvas, ctx, width, height} = scene;
+  const maxY = niceMax(Math.max(...data, 0) * 1.1 || 1);
+  const tickFormatter = options.tickFormatter || (v => v >= 1000 ? `${Math.round(v / 1000)}K` : `${Math.round(v)}`);
+  const {m, plotW, plotH} = drawAxes(ctx, width, height, maxY, tickFormatter);
+  const slot = plotW / labels.length;
+  const barW = Math.max(6, slot * 0.7);
+  const step = labelStep(labels.length, 9);
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  labels.forEach((label, i) => {
+    const x = m.left + slot * i + slot / 2;
+    if (i % step === 0 || i === labels.length - 1) ctx.fillText(label, x, height - m.bottom + 8);
+    const value = data[i] || 0;
+    if (value <= 0) return;
+    const h = plotH * (value / maxY);
+    const y = height - m.bottom - h;
+    const color = options.barColor ? options.barColor(value, i) : 'rgba(56,189,248,.6)';
+    roundRect(ctx, x - barW / 2, y, barW, h, 4, color);
+  });
+  const card = canvas.closest('.card') || canvas.parentElement;
+  const tooltip = options.hoverFormatter ? ensureTooltip(card) : null;
+  canvas.onmousemove = event => {
+    if (!tooltip) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const startX = m.left;
+    const endX = width - m.right;
+    if (x < startX || x > endX){ tooltip.style.opacity = '0'; return; }
+    const hitIndex = Math.max(0, Math.min(labels.length - 1, Math.floor((x - startX) / Math.max(slot, 1))));
+    tooltip.innerHTML = options.hoverFormatter(data[hitIndex] || 0, labels[hitIndex], hitIndex);
+    positionTooltip(tooltip, card, event);
+  };
+  canvas.onmouseleave = () => { if (tooltip) tooltip.style.opacity = '0'; };
+}
+function drawLineChart(id, labels, datasets, options = {}){
+  const scene = setupCanvas(id, options.height || 260);
+  if (!scene) return;
+  const {canvas, ctx, width, height} = scene;
+  const allValues = datasets.flatMap(ds => ds.data);
+  const minY = options.minY ?? 0;
+  const maxY = options.maxY ?? niceMax(Math.max(...allValues, 0) * 1.1 || 1);
+  const tickFormatter = options.tickFormatter || (v => `${v.toFixed(1)}%`);
+  const {m, plotW, plotH} = drawAxes(ctx, width, height, maxY - minY, v => tickFormatter(v + minY));
+  const toX = i => m.left + (plotW * i / Math.max(labels.length - 1, 1));
+  const toY = value => m.top + plotH - ((value - minY) / Math.max(maxY - minY, 1)) * plotH;
+  const step = labelStep(labels.length, 6);
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  labels.forEach((label, i) => {
+    const x = toX(i);
+    if (i % step === 0 || i === labels.length - 1) ctx.fillText(label, x, height - m.bottom + 8);
+  });
+  datasets.forEach(ds => {
+    ctx.save();
+    ctx.strokeStyle = ds.color;
+    ctx.lineWidth = ds.lineWidth || 2;
+    if (ds.dash) ctx.setLineDash(ds.dash);
+    ctx.beginPath();
+    ds.data.forEach((value, i) => {
+      const x = toX(i);
+      const y = toY(value);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+    if (ds.fill){
+      ctx.lineTo(toX(ds.data.length - 1), m.top + plotH);
+      ctx.lineTo(toX(0), m.top + plotH);
+      ctx.closePath();
+      ctx.fillStyle = ds.fill;
+      ctx.fill();
+      ctx.beginPath();
+      ds.data.forEach((value, i) => {
+        const x = toX(i);
+        const y = toY(value);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      });
+      ctx.strokeStyle = ds.color;
+      ctx.stroke();
+    }
+    if (ds.points !== false){
+      ds.data.forEach((value, i) => {
+        const x = toX(i);
+        const y = toY(value);
+        ctx.beginPath();
+        ctx.fillStyle = ds.pointColor ? ds.pointColor(value, i) : ds.color;
+        ctx.arc(x, y, ds.pointRadius || 4, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+    ctx.restore();
+  });
+  const card = canvas.closest('.card') || canvas.parentElement;
+  const tooltip = options.hoverFormatter ? ensureTooltip(card) : null;
+  canvas.onmousemove = event => {
+    if (!tooltip) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    if (x < m.left || x > width - m.right){ tooltip.style.opacity = '0'; return; }
+    const ratio = (x - m.left) / Math.max(plotW, 1);
+    const index = Math.max(0, Math.min(labels.length - 1, Math.round(ratio * Math.max(labels.length - 1, 1))));
+    tooltip.innerHTML = options.hoverFormatter(index, labels[index], datasets);
+    positionTooltip(tooltip, card, event);
+  };
+  canvas.onmouseleave = () => { if (tooltip) tooltip.style.opacity = '0'; };
+}
+const DAILY = [1462, 1494, 2908, 1871, 1962, 1578, 3298, 2023, 3496, 1542, 3194, 1840, 1542, 0, 1382, 1614, 1440, 1356, 1402, 13558, 1356, 1520, 3135, 1546, 1665, 1636, 1664, 1724, 1443, 2489];
+const DAYS = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"];
+const AR_L = ["01.06", "02.06", "03.06", "03.06", "04.06", "05.06", "06.06", "07.06", "07.06", "08.06", "09.06", "10.06", "11.06", "11.06", "12.06", "13.06", "15.06", "16.06", "17.06", "18.06", "19.06", "20.06", "20.06", "20.06", "20.06", "20.06", "20.06", "20.06", "20.06", "20.06", "20.06", "21.06", "22.06", "23.06", "23.06", "24.06", "25.06", "26.06", "27.06", "28.06", "29.06", "30.06"];
+const AR_AXIS = ["01", "02", "03", "03", "04", "05", "06", "07", "07", "08", "09", "10", "11", "11", "12", "13", "15", "16", "17", "18", "19", "20", "20", "20", "20", "20", "20", "20", "20", "20", "20", "21", "22", "23", "23", "24", "25", "26", "27", "28", "29", "30"];
+const AR_D = [1.92, 1.41, 2.04, 1.67, 5.08, 1.83, 2.41, 2.09, 1.63, 1.63, 2.83, 1.88, 1.91, 1.67, 2.61, 2.08, 2.03, 3.41, 2.29, 1.84, 3.0, 0.83, 0.85, 2.29, 0.82, 1.86, 1.95, 1.64, 1.32, 0.76, 2.16, 3.39, 1.84, 1.28, 4.56, 2.07, 3.42, 3.91, 1.74, 1.33, 3.05, 1.25];
+const AVG_LINE = [2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18, 2.18];
+addLegend('arChart', [
+  { label: 'AR% (охват)', color: '#34d399' },
+  { label: 'Среднее 2,18%', color: 'rgba(251,146,60,.8)' }
+]);
+function renderTelegramCharts() {
+  drawBarChart('dailyChart', DAYS, DAILY, {
+    height: 260,
+    barColor: value => value > 3000 ? 'rgba(56,189,248,.9)' : value > 2000 ? 'rgba(56,189,248,.55)' : 'rgba(56,189,248,.3)',
+    hoverFormatter: (value, label) => `<strong>${label} июня</strong><br>${value.toLocaleString('ru-RU')} просмотров`
+  });
+  drawLineChart('arChart', AR_AXIS, [
+    {
+      data: AR_D,
+      color: '#34d399',
+      fill: 'rgba(52,211,153,.07)',
+      pointColor: value => value >= 3 ? '#34d399' : value >= 1.5 ? '#f59e0b' : '#f472b6',
+      pointRadius: 5
+    },
+    {
+      data: AVG_LINE,
+      color: 'rgba(251,146,60,.55)',
+      dash: [5, 4],
+      points: false
+    }
+  ], {
+    height: 200,
+    hoverFormatter: (index, label, datasets) => `<strong>${label} июня</strong><br>AR%: ${datasets[0].data[index].toFixed(2)}%<br>Среднее: 2,18%`
+  });
+}
+const SUBS = 9472;
+const TOP10 = [{"date": "09.06", "views": 3496, "r": 21, "f": 77, "c": 1, "text": "▶️ Есть ли жизнь вне академии? Вебинар с Викторией Коржовой По данным отчета Higher Education P…", "subscribers": 9472}, {"date": "30.06", "views": 2489, "r": 15, "f": 16, "c": 0, "text": "🫥 Прием документов в магистратуры ФББ МГУ уже идет На факультете биоинженерии и биоинформатики…", "subscribers": 9472}, {"date": "08.06", "views": 2023, "r": 25, "f": 5, "c": 3, "text": "ℹ️ Продолжаем цикл открытых лекций совместно с ФББ МГУ Друзья, напоминаем, что сегодня в 15:00…", "subscribers": 9472}, {"date": "05.06", "views": 1962, "r": 21, "f": 15, "c": 0, "text": "✉️ Дайджест возможностей от Бластим × ФББ МГУ «Чтобы получить опыт, нужен опыт» — знакомая проб…", "subscribers": 9472}, {"date": "20.06", "views": 1899, "r": 27, "f": 14, "c": 0, "text": "Не теряем настрой: факультет биоинженерии и биоинформатики открывает двери 🫥 Друзья, если вам в…", "subscribers": 9472}, {"date": "04.06", "views": 1871, "r": 28, "f": 67, "c": 0, "text": "Меньше слов, больше дела! Бесплатный интенсив по карьере в биомедицине и фармтехе от ФББ Вы ста…", "subscribers": 9472}, {"date": "12.06", "views": 1840, "r": 22, "f": 23, "c": 3, "text": "💬 Новая встреча Бластим × ФББ МГУ Вы нашли перспективную молекулу или биологическую мишень. Ста…", "subscribers": 9472}, {"date": "28.06", "views": 1724, "r": 19, "f": 4, "c": 0, "text": "⭐️ Вакансия дня: ведущий специалист по данным и моделям Кситест — лидер геномной селекции в Рос…", "subscribers": 9472}, {"date": "07.06", "views": 1721, "r": 24, "f": 4, "c": 0, "text": "❓ Почему курсы по soft skills не дают результата? К сожалению, невозможно освоить коммуникацию,…", "subscribers": 9472}, {"date": "11.06", "views": 1673, "r": 15, "f": 13, "c": 0, "text": "👩‍⚕️ Рекомендация для специалистов здравоохранения и всех причастных В Бластим мы часто говорим…", "subscribers": 9472}];
+function pillAR(v){return v >= 3 ? 'pill pill-g' : v >= 1.5 ? 'pill pill-y' : 'pill pill-m';}
+function rankCls(i){return i === 0 ? 'rk1' : i === 1 ? 'rk2' : i === 2 ? 'rk3' : '';}
+const wrap = document.getElementById('topRows');
+TOP10.forEach((p, i) => {
+  const inter = p.r + p.f + p.c;
+  const arV = inter / p.views * 100;
+  const arS = inter / SUBS * 100;
+  const row = document.createElement('div');
+  row.className = 'top-row';
+  row.innerHTML = `
+    <div><span class="rank ${rankCls(i)}">${i + 1}</span></div>
+    <div>
+      <div class="snippet">${p.text}</div>
+      <div class="snip-date">${p.date}</div>
+    </div>
+    <div class="num">${p.views.toLocaleString('ru-RU')}</div>
+    <div class="sm col-r">${p.r}</div>
+    <div class="sm col-f">${p.f}</div>
+    <div><span class="${pillAR(arV)}">${arV.toFixed(2)}%</span></div>
+    <div class="col-sub"><span class="pill pill-p">${arS.toFixed(2)}%</span></div>`;
+  wrap.appendChild(row);
+});
+requestAnimationFrame(renderTelegramCharts);
+window.addEventListener('load', renderTelegramCharts);
+window.addEventListener('resize', renderTelegramCharts);
+</script>
+</body>
+</html>

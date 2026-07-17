@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Бластим · Instagram SMM-отчёт · Июнь 2026</title>
+<style>
+:root{
+  --bg:#0b0b14;
+  --panel:#121222;
+  --panel-2:#17172b;
+  --line:#26263a;
+  --text:#f2f3f7;
+  --muted:#9ea3b8;
+  --pink:#f205d8;
+  --violet:#6127ff;
+  --blue:#4f8bff;
+  --green:#3ddc97;
+  --warm:#ffb84d;
+  --danger:#ff6b7d;
+  --r:18px;
+  --shadow:0 22px 50px rgba(0,0,0,.32);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Inter","Segoe UI",system-ui,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(242,5,216,.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(97,39,255,.20), transparent 24%),
+    linear-gradient(180deg,#0c0c16 0%,#090912 100%);
+  -webkit-font-smoothing:antialiased;
+}
+.ticker{
+  overflow:hidden;
+  background:linear-gradient(90deg,var(--pink),var(--violet));
+  color:#fff;
+  white-space:nowrap;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.ticker__track{
+  display:inline-block;
+  padding:10px 0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  animation:scroll-left 44s linear infinite;
+}
+.ticker__track span{padding-right:56px}
+@keyframes scroll-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.page{max-width:1160px;margin:0 auto;padding:0 24px 90px}
+header{
+  padding:56px 0 34px;
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.brand{display:flex;gap:18px;align-items:flex-start}
+.brand-mark{
+  width:54px;height:54px;border-radius:16px;flex:0 0 auto;
+  background:linear-gradient(135deg,var(--pink),var(--violet) 55%,#8ec5ff);
+  box-shadow:0 12px 30px rgba(97,39,255,.35);
+}
+.eyebrow{
+  margin:0 0 10px;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--muted);
+}
+h1{
+  margin:0;
+  font-size:clamp(34px,6vw,62px);
+  line-height:1;
+  letter-spacing:-.04em;
+}
+.subtitle{
+  margin:14px 0 0;
+  color:var(--muted);
+  font-size:15px;
+}
+.header-tags{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-start}
+.tag{
+  padding:9px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  font-size:12px;
+  font-weight:700;
+}
+.tag.pink{color:#fff;background:rgba(242,5,216,.16);border-color:rgba(242,5,216,.24)}
+.tag.violet{color:#fff;background:rgba(97,39,255,.16);border-color:rgba(97,39,255,.24)}
+.tag.green{color:#fff;background:rgba(61,220,151,.14);border-color:rgba(61,220,151,.22)}
+
+.section-title{
+  margin:38px 0 16px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.section-title::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:rgba(255,255,255,.08);
+}
+
+.hero-grid,
+.kpi-grid,
+.split-grid,
+.audience-grid,
+.profile-grid,
+.top-grid,
+.geo-grid{
+  display:grid;
+  gap:18px;
+}
+.hero-grid{grid-template-columns:1.2fr .8fr}
+.kpi-grid{grid-template-columns:repeat(4,1fr)}
+.split-grid{grid-template-columns:repeat(2,1fr)}
+.profile-grid{grid-template-columns:1.15fr .85fr}
+.audience-grid{grid-template-columns:1fr}
+.geo-grid{grid-template-columns:1fr}
+.top-grid{grid-template-columns:repeat(4,1fr)}
+
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r);
+  padding:22px;
+  box-shadow:var(--shadow);
+}
+.card.soft{
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+}
+.card.gradient{
+  background:
+    radial-gradient(circle at top right, rgba(242,5,216,.20), transparent 34%),
+    radial-gradient(circle at left bottom, rgba(97,39,255,.20), transparent 36%),
+    linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
+}
+.card-title{
+  margin:0 0 18px;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.metric{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.metric-label{
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.metric-value{
+  font-size:clamp(30px,5vw,54px);
+  font-weight:800;
+  letter-spacing:-.05em;
+  line-height:.98;
+}
+.metric-sub{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.5;
+}
+.delta-up{color:var(--green)}
+.delta-down{color:var(--danger)}
+.kpi{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  min-height:150px;
+}
+.kpi .metric-value{font-size:36px}
+
+.donut-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+.donut-card{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+.donut{
+  --value:50;
+  width:148px;height:148px;border-radius:50%;
+  position:relative;flex:0 0 auto;
+  background:
+    conic-gradient(var(--pink) 0 calc(var(--value) * 1%), var(--violet) calc(var(--value) * 1%) 100%);
+  box-shadow:0 18px 38px rgba(0,0,0,.24);
+}
+.donut::before{
+  content:"";
+  position:absolute;inset:14px;border-radius:50%;
+  background:linear-gradient(180deg,#11121d,#0c0d16);
+  border:1px solid rgba(255,255,255,.08);
+}
+.donut-copy{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;z-index:1;padding:22px;
+}
+.donut-copy strong{display:block;font-size:34px;letter-spacing:-.05em}
+.donut-copy span{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.legend{
+  display:grid;
+  gap:10px;
+  width:100%;
+}
+.legend-row{
+  display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:14px;
+}
+.legend-row span:first-child{
+  display:inline-flex;align-items:center;gap:8px;
+}
+.dot{
+  width:10px;height:10px;border-radius:50%;display:inline-block;
+}
+.dot.pink{background:var(--pink)}
+.dot.violet{background:var(--violet)}
+
+.stack-list{display:grid;gap:18px}
+.stack{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px 16px;
+  align-items:center;
+}
+.stack-label{font-size:15px}
+.stack-value{font-size:14px;font-weight:800}
+.track{
+  grid-column:1 / span 2;
+  height:11px;border-radius:999px;
+  background:#ececf31a;
+  position:relative;overflow:hidden;
+  cursor:pointer;
+}
+.fill{
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--pink),var(--violet));
+}
+.fill.blue{background:linear-gradient(90deg,#7f8cff,#4fc4ff)}
+
+.sublist{display:grid;gap:18px}
+.subrow{
+  display:flex;justify-content:space-between;gap:18px;align-items:flex-end;
+  padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06);
+}
+.subrow:last-child{border-bottom:none;padding-bottom:0}
+.subrow strong{font-size:26px;letter-spacing:-.04em}
+.subrow small{display:block;margin-top:6px;color:var(--muted);font-size:13px}
+
+.mini-note{
+  margin-top:16px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.55;
+}
+
+.top-card{
+  padding:18px;
+  border-radius:18px;
+  min-height:175px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03)),
+    linear-gradient(135deg,rgba(242,5,216,.08),rgba(97,39,255,.12));
+  border:1px solid rgba(255,255,255,.08);
+}
+.top-card h3{
+  margin:0;
+  font-size:17px;
+  line-height:1.15;
+  letter-spacing:-.03em;
+}
+.top-meta{
+  display:flex;justify-content:space-between;gap:12px;align-items:flex-end;
+  margin-top:16px;
+}
+.top-value{
+  font-size:30px;font-weight:800;letter-spacing:-.05em;
+}
+.top-date,.top-type{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+
+.list-card{display:grid;gap:16px}
+.list-row{
+  display:grid;
+  grid-template-columns:40px 1fr auto;
+  gap:14px;
+  align-items:start;
+}
+.rank{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  font-size:13px;font-weight:800;color:var(--muted);
+}
+.list-row h4{
+  margin:0 0 6px;
+  font-size:15px;line-height:1.25;
+}
+.list-row p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.45;
+}
+.list-row strong{
+  font-size:21px;letter-spacing:-.04em;
+}
+.muted{color:var(--muted)}
+
+.bars{display:grid;gap:14px}
+.bar-row{
+  display:grid;
+  grid-template-columns:88px 1fr 64px;
+  gap:14px;
+  align-items:center;
+}
+.bar-row .track{grid-column:auto;height:10px}
+
+footer{
+  margin:42px 0 0;
+  padding-top:22px;
+  border-top:1px solid rgba(255,255,255,.08);
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+}
+
+@media(max-width:1060px){
+  .hero-grid,.profile-grid,.audience-grid,.geo-grid,.split-grid{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .top-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  .page{padding:0 16px 72px}
+  .donut-grid{grid-template-columns:1fr}
+  .kpi-grid,.top-grid{grid-template-columns:1fr}
+  .donut-card{flex-direction:column;align-items:flex-start}
+  .bar-row{grid-template-columns:78px 1fr 54px}
+}
+</style>
+</head>
+<body>
+<div class="ticker">
+  <div class="ticker__track">
+    <span>INSTAGRAM · ИЮНЬ 2026 · ПРОСМОТРЫ 190 864 · ОХВАТ 2 033 · ВЗАИМОДЕЙСТВИЯ 18 047 · ПОДПИСЧИКИ 3 343 · ПРИРОСТ +773 · PROFILE ACTIONS 1 237 · REELS 98,0% ПРОСМОТРОВ · REELS 99,7% ВЗАИМОДЕЙСТВИЙ</span>
+    <span>INSTAGRAM · ИЮНЬ 2026 · ПРОСМОТРЫ 190 864 · ОХВАТ 2 033 · ВЗАИМОДЕЙСТВИЯ 18 047 · ПОДПИСЧИКИ 3 343 · ПРИРОСТ +773 · PROFILE ACTIONS 1 237 · REELS 98,0% ПРОСМОТРОВ · REELS 99,7% ВЗАИМОДЕЙСТВИЙ</span>
+  </div>
+</div>
+
+<div class="page">
+  <header>
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div>
+        <p class="eyebrow">Instagram Analytics · Previous Month</p>
+        <h1>SMM-отчёт · Instagram</h1>
+        <p class="subtitle">Бластим · 1 июня – 30 июня 2026 · дашборд по Instagram Insights</p>
+      </div>
+    </div>
+    <div class="header-tags">
+      <span class="tag pink">190 864 просмотра</span>
+      <span class="tag violet">18 047 взаимодействий</span>
+      <span class="tag green">3 343 подписчика</span>
+    </div>
+  </header>
+
+  <div class="section-title">Обзор</div>
+  <div class="hero-grid">
+    <div class="card gradient">
+      <div class="metric">
+        <div class="metric-label">Главный итог месяца</div>
+        <div class="metric-value">Reels рулят ещё сильнее,<br>а рост стал точнее</div>
+        <div class="metric-sub">
+          98,0% просмотров и 99,7% взаимодействий пришлись на Reels — это
+          выше, чем в мае (96,2% и 99,3%). Публикации и сторис окончательно
+          превратились в поддерживающий формат.
+        </div>
+      </div>
+      <div class="mini-note">
+        Главная перемена месяца — не в объёме, а в качестве роста. Охват
+        аккаунтов упал с 2 976 до 2 033 (−31,7%), но чистый прирост
+        подписчиков вырос почти вдвое — с +387 до +773. Конверсия охваченного
+        аккаунта в подписчика выросла с 13,0% до 38,0%. Это значит, что в
+        июне контент показывался более узкой, но заметно более целевой
+        аудитории.
+      </div>
+    </div>
+    <div class="card soft">
+      <div class="sublist">
+        <div class="subrow">
+          <div>
+            <div class="metric-label">Охваченные аккаунты</div>
+            <small>по сравнению с маем</small>
+          </div>
+          <div>
+            <strong>2 033</strong>
+            <small class="delta-down">−31,7%</small>
+          </div>
+        </div>
+        <div class="subrow">
+          <div>
+            <div class="metric-label">Действия в профиле</div>
+            <small>визиты и переходы по ссылке</small>
+          </div>
+          <div>
+            <strong>1 237</strong>
+            <small class="delta-up">+15,9%</small>
+          </div>
+        </div>
+        <div class="subrow">
+          <div>
+            <div class="metric-label">Чистый прирост базы</div>
+            <small>3 343 подписчика на конец июня</small>
+          </div>
+          <div>
+            <strong>+773</strong>
+            <small class="delta-up">+99,7% к маю</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">KPI</div>
+  <div class="kpi-grid">
+    <div class="card kpi">
+      <div class="metric-label">Просмотры</div>
+      <div class="metric-value">190 864</div>
+      <div class="metric-sub">+5,7% к маю · из них 3,8% пришлись на подписчиков, 96,2% — на новую аудиторию</div>
+    </div>
+    <div class="card kpi">
+      <div class="metric-label">Взаимодействия</div>
+      <div class="metric-value">18 047</div>
+      <div class="metric-sub">+4,4% к маю · 99,7% из них — реакции на Reels</div>
+    </div>
+    <div class="card kpi">
+      <div class="metric-label">Подписчики</div>
+      <div class="metric-value">3 343</div>
+      <div class="metric-sub">конец июня · +30,1% к 31 мая, +32,1% к базе на конец мая</div>
+    </div>
+    <div class="card kpi">
+      <div class="metric-label">ER на просмотр</div>
+      <div class="metric-value">9,46%</div>
+      <div class="metric-sub">18 047 взаимодействий на 190 864 просмотра · почти без изменений к маю (9,57%)</div>
+    </div>
+  </div>
+
+  <div class="section-title">Аудиторные Сдвиги</div>
+  <div class="split-grid">
+    <div class="card">
+      <div class="card-title">Структура просмотров</div>
+      <div class="donut-card">
+        <div class="donut" style="--value:3.8">
+          <div class="donut-copy">
+            <span>Просмотры</span>
+            <strong>190,9k</strong>
+          </div>
+        </div>
+        <div class="legend">
+          <div class="legend-row">
+            <span><i class="dot pink"></i>Подписчики</span>
+            <strong>3,8%</strong>
+          </div>
+          <div class="legend-row">
+            <span><i class="dot violet"></i>Неподписчики</span>
+            <strong>96,2%</strong>
+          </div>
+          <div class="mini-note">
+            Просмотры почти целиком приходят извне текущей базы — доля своих
+            подписчиков даже ниже, чем в мае (7,0%), что подтверждает: рост
+            в июне шёл через алгоритмическую раздачу новой аудитории.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Структура взаимодействий</div>
+      <div class="donut-card">
+        <div class="donut" style="--value:99.7">
+          <div class="donut-copy">
+            <span>Reels</span>
+            <strong>99,7%</strong>
+          </div>
+        </div>
+        <div class="legend">
+          <div class="legend-row">
+            <span><i class="dot pink"></i>Video Reels</span>
+            <strong>99,7%</strong>
+          </div>
+          <div class="legend-row">
+            <span><i class="dot violet"></i>Публикации и сторис</span>
+            <strong>0,3%</strong>
+          </div>
+          <div class="mini-note">
+            Практически весь meaningful engagement месяца живёт внутри
+            Reels — концентрация ещё выше, чем в мае (99,3%).
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">По Типу Контента</div>
+  <div class="profile-grid">
+    <div class="card">
+      <div class="card-title">Вклад в просмотры</div>
+      <div class="stack-list">
+        <div class="stack">
+          <div class="stack-label">Video Reels</div>
+          <div class="stack-value">98,0%</div>
+          <div class="track"><div class="fill" style="width:98%"></div></div>
+        </div>
+        <div class="stack">
+          <div class="stack-label">Публикации</div>
+          <div class="stack-value">1,8%</div>
+          <div class="track"><div class="fill" style="width:1.8%"></div></div>
+        </div>
+        <div class="stack">
+          <div class="stack-label">Истории</div>
+          <div class="stack-value">0,2%</div>
+          <div class="track"><div class="fill" style="width:.2%"></div></div>
+        </div>
+      </div>
+      <div class="mini-note">
+        187 тыс. просмотров из 190 864 дали Reels. Публикации и сторис в
+        июне ещё сильнее ужались как источник охвата.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Вклад во взаимодействия</div>
+      <div class="stack-list">
+        <div class="stack">
+          <div class="stack-label">Video Reels</div>
+          <div class="stack-value">99,7%</div>
+          <div class="track"><div class="fill blue" style="width:99.7%"></div></div>
+        </div>
+        <div class="stack">
+          <div class="stack-label">Публикации</div>
+          <div class="stack-value">0,3%</div>
+          <div class="track"><div class="fill blue" style="width:.3%"></div></div>
+        </div>
+        <div class="stack">
+          <div class="stack-label">Истории</div>
+          <div class="stack-value">0,0%</div>
+          <div class="track"><div class="fill blue" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="mini-note">
+        Публикации собрали лишь 47 взаимодействий за весь месяц — формат
+        почти не участвует в вовлечении.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Действия И Подписки</div>
+  <div class="profile-grid">
+    <div class="card">
+      <div class="card-title">Действия в профиле</div>
+      <div class="sublist">
+        <div class="subrow">
+          <div>
+            <div class="metric-label">Всего действий</div>
+            <small>в сравнении с маем</small>
+          </div>
+          <div>
+            <strong>1 237</strong>
+            <small class="delta-up">+15,9%</small>
+          </div>
+        </div>
+        <div class="subrow">
+          <div>
+            <div class="metric-label">Посещения профиля</div>
+          </div>
+          <div>
+            <strong>1 149</strong>
+          </div>
+        </div>
+        <div class="subrow">
+          <div>
+            <div class="metric-label">Нажатия на ссылку в биографии</div>
+          </div>
+          <div>
+            <strong>88</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Подписчики</div>
+      <div class="sublist">
+        <div class="subrow">
+          <div>
+            <div class="metric-label">База на конец июня</div>
+          </div>
+          <div>
+            <strong>3 343</strong>
+            <small class="delta-up">+30,1% с 31 мая</small>
+          </div>
+        </div>
+        <div class="subrow">
+          <div>
+            <div class="metric-label">Чистый прирост</div>
+          </div>
+          <div>
+            <strong>+773</strong>
+            <small class="delta-up">+99,7% к приросту мая (+387)</small>
+          </div>
+        </div>
+        <div class="subrow">
+          <div>
+            <div class="metric-label">Конверсия охвата в подписку</div>
+            <small>чистый прирост / охваченные аккаунты</small>
+          </div>
+          <div>
+            <strong>38,0%</strong>
+            <small class="delta-up">против 13,0% в мае</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Топ Контент</div>
+  <div class="split-grid">
+    <div class="card list-card">
+      <div class="card-title">Топ по просмотрам</div>
+      <div class="list-row">
+        <div class="rank">01</div>
+        <div>
+          <h4>Вита Степанова — анонс платного вебинара</h4>
+          <p>«Почему хороших специалистов могут не замечать, и что с этим делать»</p>
+        </div>
+        <strong>≈1,3k</strong>
+      </div>
+      <div class="list-row">
+        <div class="rank">02</div>
+        <div>
+          <h4>Виктория Коржова — анонс платного вебинара</h4>
+          <p>Как выбрать новую карьерную траекторию в науке</p>
+        </div>
+        <strong>≈1k</strong>
+      </div>
+      <div class="mini-note">
+        Помимо этих публикаций, главный вклад в просмотры месяца дал один
+        научно-мемный Reels («Активный центр»), близкий по формату к
+        майскому вирусному хиту — именно он стоит за резким скачком на
+        графике в конце июня.
+      </div>
+    </div>
+    <div class="card list-card">
+      <div class="card-title">Топ по приросту подписчиков</div>
+      <div class="list-row">
+        <div class="rank">01</div>
+        <div>
+          <h4>«Активный центр» — научный Reels</h4>
+          <p>Главный магнит новых подписчиков месяца</p>
+        </div>
+        <strong>+8</strong>
+      </div>
+      <div class="list-row">
+        <div class="rank">02</div>
+        <div>
+          <h4>Виктория Коржова — анонс вебинара</h4>
+          <p>Второй результат по конверсии в подписку</p>
+        </div>
+        <strong>+2</strong>
+      </div>
+      <div class="mini-note">
+        Даже топ по подписке остаётся сосредоточенным на 1–2 материалах —
+        рост базы всё ещё держится на отдельных удачных форматах, а не на
+        широкой линейке одинаково сильных постов.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Аудитория</div>
+  <div class="audience-grid">
+    <div class="card">
+      <div class="card-title">Пол и возраст</div>
+      <div class="bars" style="margin-bottom:22px">
+        <div class="bar-row">
+          <div>Женщины</div>
+          <div class="track"><div class="fill blue" style="width:57.6%"></div></div>
+          <strong>57,6%</strong>
+        </div>
+        <div class="bar-row">
+          <div>Мужчины</div>
+          <div class="track"><div class="fill" style="width:42.4%"></div></div>
+          <strong>42,4%</strong>
+        </div>
+      </div>
+      <div class="bars">
+        <div class="bar-row">
+          <div>25–34</div>
+          <div class="track"><div class="fill" style="width:49.7%"></div></div>
+          <strong>49,7%</strong>
+        </div>
+        <div class="bar-row">
+          <div>35–44</div>
+          <div class="track"><div class="fill" style="width:22.7%"></div></div>
+          <strong>22,7%</strong>
+        </div>
+        <div class="bar-row">
+          <div>18–24</div>
+          <div class="track"><div class="fill" style="width:20.7%"></div></div>
+          <strong>20,7%</strong>
+        </div>
+        <div class="bar-row">
+          <div>45–54</div>
+          <div class="track"><div class="fill" style="width:5.3%"></div></div>
+          <strong>5,3%</strong>
+        </div>
+        <div class="bar-row">
+          <div>55–64</div>
+          <div class="track"><div class="fill" style="width:.9%"></div></div>
+          <strong>0,9%</strong>
+        </div>
+        <div class="bar-row">
+          <div>65+</div>
+          <div class="track"><div class="fill" style="width:.8%"></div></div>
+          <strong>0,8%</strong>
+        </div>
+        <div class="bar-row">
+          <div>13–17</div>
+          <div class="track"><div class="fill" style="width:0%"></div></div>
+          <strong>0,0%</strong>
+        </div>
+      </div>
+      <div class="mini-note">
+        Ядро аудитории — женщины 25–34 (49,7% по возрасту в целом, при
+        57,6% женской аудитории). Профиль почти не изменился по сравнению
+        с маем, что говорит о стабильности целевой аудитории при росте базы.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">География</div>
+  <div class="geo-grid">
+    <div class="card">
+      <div class="card-title">Топ страны</div>
+      <div class="bars">
+        <div class="bar-row">
+          <div>Россия</div>
+          <div class="track"><div class="fill blue" style="width:71.4%"></div></div>
+          <strong>71,4%</strong>
+        </div>
+        <div class="bar-row">
+          <div>Казахстан</div>
+          <div class="track"><div class="fill blue" style="width:4.4%"></div></div>
+          <strong>4,4%</strong>
+        </div>
+        <div class="bar-row">
+          <div>Беларусь</div>
+          <div class="track"><div class="fill blue" style="width:3.3%"></div></div>
+          <strong>3,3%</strong>
+        </div>
+      </div>
+      <div class="mini-note">
+        Более трёх четвертей аудитории по-прежнему из России, Казахстана и
+        Беларуси — география почти не сместилась относительно мая.
+      </div>
+    </div>
+  </div>
+
+</div>
+<script>
+(() => {
+  const tooltip = document.createElement('div');
+  tooltip.style.position = 'fixed';
+  tooltip.style.zIndex = '9999';
+  tooltip.style.pointerEvents = 'none';
+  tooltip.style.padding = '8px 10px';
+  tooltip.style.borderRadius = '10px';
+  tooltip.style.background = '#17172b';
+  tooltip.style.border = '1px solid rgba(255,255,255,.08)';
+  tooltip.style.boxShadow = '0 14px 32px rgba(0,0,0,.32)';
+  tooltip.style.color = '#f2f3f7';
+  tooltip.style.fontSize = '12px';
+  tooltip.style.lineHeight = '1.35';
+  tooltip.style.whiteSpace = 'nowrap';
+  tooltip.style.opacity = '0';
+  tooltip.style.transform = 'translate(-50%, calc(-100% - 12px))';
+  tooltip.style.transition = 'opacity .12s ease';
+  document.body.appendChild(tooltip);
+
+  const showTip = (event, html) => {
+    tooltip.innerHTML = html;
+    tooltip.style.left = `${event.clientX}px`;
+    tooltip.style.top = `${event.clientY - 4}px`;
+    tooltip.style.opacity = '1';
+  };
+  const hideTip = () => {
+    tooltip.style.opacity = '0';
+  };
+  const bindTip = (target, getHtml) => {
+    if (!target) return;
+    target.addEventListener('mouseenter', event => showTip(event, getHtml()));
+    target.addEventListener('mousemove', event => showTip(event, getHtml()));
+    target.addEventListener('mouseleave', hideTip);
+  };
+
+  document.querySelectorAll('.stack').forEach(row => {
+    const label = row.querySelector('.stack-label')?.textContent?.trim();
+    const value = row.querySelector('.stack-value')?.textContent?.trim();
+    bindTip(row, () => `<strong>${label}</strong><br>${value}`);
+  });
+
+  document.querySelectorAll('.bar-row').forEach(row => {
+    const label = row.querySelector('div')?.textContent?.trim();
+    const value = row.querySelector('strong')?.textContent?.trim();
+    bindTip(row, () => `<strong>${label}</strong><br>${value}`);
+  });
+})();
+</script>
+</body>
+</html>
