@@ -125,31 +125,31 @@ canvas{display:block;width:100%;max-width:100%;max-height:260px}
 <div class="stitle">Что означают метрики</div>
 <div class="glossary">
   <div class="gterm">
-    <div class="gterm-name">VIEWS / REACH</div>
-    <div class="gterm-full">Повторяемость контакта</div>
-    <div class="gterm-desc">Соотношение просмотров к охвату показывает, сколько повторных просмотров собирает контент категории «Посты» внутри месяца.</div>
-    <div class="gterm-formula">= Просмотры / Охват</div>
+    <div class="gterm-name">AVG</div>
+    <div class="gterm-full">Average — среднее</div>
+    <div class="gterm-desc">Средняя величина внутри месяца. Здесь показаны средние значения по дням, чтобы было видно типичный рабочий уровень контента.</div>
+    <div class="gterm-formula">= Сумма / Количество дней</div>
   </div>
   <div class="gterm">
     <div class="gterm-name">ER%</div>
-    <div class="gterm-full">Лайки от охвата</div>
+    <div class="gterm-full">Engagement Rate — лайки</div>
     <div class="gterm-desc">Самый прямой показатель эмоционального отклика: какая доля достигнутой аудитории поставила лайк.</div>
     <div class="gterm-formula">= Лайки / Охват × 100</div>
   </div>
   <div class="gterm">
     <div class="gterm-name">AR%</div>
-    <div class="gterm-full">Позитивные действия от охвата</div>
-    <div class="gterm-desc">Сумма лайков, комментариев и репостов по отношению к охвату. В этом экспорте это лучший прокси общей вовлечённости по постам.</div>
+    <div class="gterm-full">Action Rate — все позитивные действия</div>
+    <div class="gterm-desc">Сумма лайков, комментариев и репостов по отношению к охвату. Показывает общую активность аудитории вокруг постов.</div>
     <div class="gterm-formula">= (Лайки + Комм. + Репосты) / Охват × 100</div>
   </div>
   <div class="gterm">
-    <div class="gterm-name">HIDE RATE</div>
-    <div class="gterm-full">Доля скрытий</div>
-    <div class="gterm-desc">Показывает долю аудитории, которая скрыла контент. Это полезный контрсигнал рядом с ростом охвата и просмотров.</div>
-    <div class="gterm-formula">= Скрытия / Охват × 100</div>
+    <div class="gterm-name">VR%</div>
+    <div class="gterm-full">Viral Rate — репосты</div>
+    <div class="gterm-desc">Доля аудитории, которая поделилась постом. Чем выше показатель, тем сильнее органическое распространение контента.</div>
+    <div class="gterm-formula">= Репосты / Охват × 100</div>
   </div>
 </div>
-<div class="stitle">Посты — охват и просмотры</div>
+<div class="stitle">Посты — метрики к охвату</div>
 <div class="kpi-grid c-blue">
   <div class="kpi">
     <div class="kpi-label">Дни в выборке</div>
@@ -167,12 +167,12 @@ canvas{display:block;width:100%;max-width:100%;max-height:260px}
     <div class="kpi-sub">длиннее ленты: просмотры выше охвата в 2,11x</div>
   </div>
   <div class="kpi">
-    <div class="kpi-label">AVG Reach / день</div>
+    <div class="kpi-label">AVG охват / день</div>
     <div class="kpi-value">888</div>
     <div class="kpi-sub">средний дневной охват постового контента</div>
   </div>
   <div class="kpi">
-    <div class="kpi-label">AVG Views / день</div>
+    <div class="kpi-label">AVG просмотры / день</div>
     <div class="kpi-value">1 871</div>
     <div class="kpi-sub">среднее число просмотров за день</div>
   </div>
@@ -193,7 +193,7 @@ canvas{display:block;width:100%;max-width:100%;max-height:260px}
   <div class="kpi">
     <div class="kpi-label">Репосты</div>
     <div class="kpi-value">209</div>
-    <div class="kpi-sub">Share Rate 0,78% от охвата</div>
+    <div class="kpi-sub">VR 0,78% от охвата</div>
   </div>
   <div class="kpi">
     <div class="kpi-label">Комментарии</div>
@@ -206,7 +206,7 @@ canvas{display:block;width:100%;max-width:100%;max-height:260px}
     <div class="kpi-sub">Hide Rate 0,09% — низкий уровень негативного сигнала</div>
   </div>
   <div class="kpi">
-    <div class="kpi-label">Позитивные действия</div>
+    <div class="kpi-label">Все действия</div>
     <div class="kpi-value">561</div>
     <div class="kpi-sub">лайки + комментарии + репосты</div>
   </div>
@@ -214,6 +214,20 @@ canvas{display:block;width:100%;max-width:100%;max-height:260px}
     <div class="kpi-label">AR% охват</div>
     <div class="kpi-value">2,11%</div>
     <div class="kpi-sub">подписчики дали 35 304 просмотров и 15 604 охвата</div>
+  </div>
+</div>
+
+<div class="stitle">Сравнение с базой</div>
+<div class="insight-grid">
+  <div class="insight-card">
+    <div class="insight-kicker">К маю 2026</div>
+    <h3>Июнь вырос к прошлому месяцу и по масштабу, и по качеству реакции.</h3>
+    <p>Охват вырос с 19 993 до 26 645 (+33,3%), просмотры — с 33 114 до 56 122 (+69,5%), а средние просмотры в день поднялись с 1 274 до 1 871 (+46,9%). ER по охвату вырос с 0,67% до 1,30%, AR — с 1,55% до 2,11%, а репосты как прокси VR поднялись с 137 до 209.</p>
+  </div>
+  <div class="insight-card">
+    <div class="insight-kicker">К июню 2025</div>
+    <h3>Год-к-году июнь 2026 слабее по масштабу, но заметно лучше по качеству реакции.</h3>
+    <p>В июне 2025 VK собрал 55 529 охвата, 118 114 просмотров, 539 лайков, 220 репостов и 24 комментария. В июне 2026 — 26 645 охвата, 56 122 просмотров, 347 лайков, 209 репостов и 5 комментариев. По объёму это падение примерно на 52% и по охвату, и по просмотрам, а средние значения по дням тоже снизились: охват — с 1 851 до 888, просмотры — с 3 937 до 1 871. При этом качество реакции выросло: ER поднялся с 0,97% до 1,30%, AR — с 1,41% до 2,11%, а VR — с 0,40% до 0,78%. Отдельно усилилась внешняя дистрибуция: доля неподписчиков в охвате выросла с 16,79% до 41,47%, а в просмотрах — с 12,89% до 37,09%.</p>
   </div>
 </div>
 
